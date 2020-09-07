@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header bordered class="bg-dark text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="left = !left" />
+        <!-- <q-btn dense flat round icon="menu" @click="left = !left" /> -->
 
         <q-toolbar-title>
           <q-avatar>
@@ -12,17 +12,15 @@
           <!-- Title -->
         </q-toolbar-title>
 
-        <q-btn dense flat round icon="menu" @click="right = !right" />
+        <!-- <q-btn dense flat round icon="menu" @click="right = !right" /> -->
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="left" side="left" overlay bordered>
-      <!-- drawer content -->
+    <!-- <q-drawer v-model="left" side="left" overlay bordered>
     </q-drawer>
 
     <q-drawer v-model="right" side="right" overlay bordered>
-      <!-- drawer content -->
-    </q-drawer>
+    </q-drawer> -->
 
     <q-page-container>
       <router-view />
