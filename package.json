@@ -1,8 +1,8 @@
 {
-  "name": "game-finder",
+  "name": "game-deals",
   "version": "0.0.1",
   "description": "A simple app for finding video game deals across multiple online stores",
-  "productName": "Game Finder",
+  "productName": "Game Deals",
   "author": "Jonathan Sloan - jonathanssloan@protonmail.com",
   "private": false,
   "scripts": {

@@ -2,50 +2,54 @@
   <q-layout view="hHh lpR fFf">
     <q-header bordered class="bg-dark text-white">
       <q-toolbar>
-        <!-- <q-btn dense flat round icon="menu" @click="left = !left" /> -->
+        <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
 
         <q-toolbar-title>
-          <q-avatar>
-            <!-- <img src="" /> -->
-            <!-- <i class="fas fa-dungeon"></i> -->
-          </q-avatar>
-          <!-- Title -->
+          <q-avatar icon="fas fa-gamepad-alt" class="q-ml-none" size="xl" />
+          <!-- Title Here -->
         </q-toolbar-title>
 
-        <!-- <q-btn dense flat round icon="menu" @click="right = !right" /> -->
+        <q-input v-model="search" type="search" debounce="500" filled dense>
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
       </q-toolbar>
     </q-header>
 
-    <!-- <q-drawer v-model="left" side="left" overlay bordered>
-    </q-drawer>
-
-    <q-drawer v-model="right" side="right" overlay bordered>
-    </q-drawer> -->
+    <q-drawer v-model="left" side="left" bordered> </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <!-- <q-footer bordered class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
-          </q-avatar>
-          Title
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer> -->
   </q-layout>
 </template>
 
 <script>
+import { store, mutations } from "../store/store";
+
 export default {
+  computed: {
+    query() {
+      return store.query;
+    }
+  },
+
   data() {
     return {
       left: false,
-      right: false
+      search: ""
     };
+  },
+
+  methods: {
+    setQuery: mutations.setQuery
+  },
+
+  watch: {
+    search() {
+      this.setQuery(this.search);
+    }
   }
 };
 </script>
