@@ -1,91 +1,48 @@
 <template>
-  <q-page class="flex flex-center">
-    <article
-      v-if="results.length === 0 && query === ''"
-      class="flex flex-center"
-      style="max-width: 1200px;"
-    >
-      <!-- TODO: MAKE THIS A COMPONENT -->
-      <q-card
-        v-for="deal in deals"
-        :key="deal.dealID"
-        class="game-card flex row items-center"
-      >
-        <q-img
-          :src="`${deal.thumb}`"
-          style="height:120px; background-position: 100% 0;"
-        />
+  <q-page class="column">
+    <q-card class="col-4">
+      <!-- {{ test }} -->
+      <!-- <div v-for="t in test" :key="t.storeID">{{ t.storeName }}</div> -->
+      <!-- <q-list>
+        <q-item v-for="deal in deals" :key="deal.dealID">
+          <q-item-section top avatar>
+            <q-img :src="`${deal.thumb}`" style="width:75px;" />
+          </q-item-section>
 
-        <q-card-section class="ellipsis">
-          <div class="text-h6 ellipsis">{{ deal.title }}</div>
-          <div class="text-subtitle2">Sale Price: {{ deal.salePrice }}</div>
-          <div class="text-subtitle2">Normal Price: {{ deal.normalPrice }}</div>
-        </q-card-section>
+          <q-item-section top>
+            <q-item-label>Single line item</q-item-label>
+            <q-item-label caption
+              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
+              adipiscit elit.</q-item-label
+            >
+          </q-item-section>
 
-        <q-card-section class="q-pt-none">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </q-card-section>
-
-        <q-card-actions>
-          <a
-            :href="`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`"
-            target="_blank"
-          >
-            <q-btn class="bg-primary text-white">View Deal</q-btn>
-          </a>
-        </q-card-actions>
-      </q-card>
-    </article>
-
-    <article v-else class="flex flex-center" style="max-width: 1200px;">
-      <!-- TODO: MAKE THIS A COMPONENT -->
-      <q-card
-        v-for="result in results"
-        :key="result.dealID"
-        class="game-card flex row items-center"
-      >
-        <q-img
-          :src="`${result.thumb}`"
-          style="height:120px; background-position: 100% 0;"
-        />
-
-        <q-card-section class="ellipsis">
-          <div class="text-h6 ellipsis">{{ result.title }}</div>
-          <div class="text-subtitle2">Sale Price: {{ result.salePrice }}</div>
-          <div class="text-subtitle2">
-            Normal Price: {{ result.normalPrice }}
-          </div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </q-card-section>
-
-        <q-card-actions>
-          <a
-            :href="
-              `https://www.cheapshark.com/redirect?dealID=${result.dealID}`
-            "
-            target="_blank"
-          >
-            <q-btn class="bg-primary text-white">Get This Deal</q-btn>
-          </a>
-        </q-card-actions>
-      </q-card>
-    </article>
+          <q-item-section side top>
+            <q-item-label caption>meta</q-item-label>
+          </q-item-section>
+        </q-item> -->
+      <!-- </q-list> -->
+    </q-card>
   </q-page>
 </template>
 
 <script>
+// import axios from "axios";
+// import GameService from "../services/GameService";
 import { store } from "../store/store";
 
 export default {
   name: "PageIndex",
 
+  // created() {
+  // this.test = GameService.getStores()
+  //   .then(response => (this.test = response.data))
+  //   .catch(error => console.log(`There was an error: ${error.response}`));
+  // GameService.getDeals(`Skyrim`).then(response => response.data);
+  // },
+
   async mounted() {
-    this.getDailyDeals();
+    // this.getDailyDeals();
   },
 
   computed: {
@@ -97,33 +54,34 @@ export default {
   data: () => ({
     apiHost: `https://www.cheapshark.com/api/1.0/`,
     deals: [],
-    results: []
+    results: [],
+    test: []
   }),
 
   methods: {
     // TODO: Make these into a service or mixin!
-
-    getDailyDeals() {
-      fetch(`${this.apiHost}/deals`)
-        .then(response => response.json())
-        .then(result => (this.deals = result))
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    },
-
-    searchDeals(gameTitle) {
-      fetch(`${this.apiHost}/deals?title=${gameTitle}`)
-        .then(response => response.json())
-        .then(result => (this.results = result))
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    }
+    // getDailyDeals() {
+    //   fetch(`${this.apiHost}/deals`)
+    //     .then(response => response.json())
+    //     .then(result => (this.deals = result))
+    //     // .then(result => console.log(result))
+    //     .catch(error => console.log("error", error));
+    // },
+    // searchDeals(gameTitle) {
+    //   fetch(`${this.apiHost}/deals?title=${gameTitle}`)
+    //     .then(response => response.json())
+    //     .then(result => (this.results = result))
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log("error", error));
+    // }
   },
 
   watch: {
-    query() {
-      this.searchDeals(this.query);
-    }
+    // query() {
+    //   GameService.getDeals(this.query).then(response =>
+    //     console.log(response.data)
+    //   );
+    // }
   }
 };
 </script>

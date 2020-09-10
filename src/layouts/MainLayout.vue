@@ -1,23 +1,48 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="lHh lpR lFf">
     <q-header bordered class="bg-dark text-white">
-      <q-toolbar>
-        <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
+      <q-toolbar class="q-pa-xs ">
+        <q-btn dense flat round icon="fad fa-sliders-h" @click="left = !left" />
 
         <q-toolbar-title>
-          <q-avatar icon="fas fa-gamepad-alt" class="q-ml-none" size="xl" />
+          <q-avatar icon="fad fa-gamepad-alt" class="q-ml-none" size="xl" />
           <!-- Title Here -->
         </q-toolbar-title>
 
-        <q-input v-model="search" type="search" debounce="500" filled dense>
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
+        <SearchInput :dense="true" :filled="true" class="lt-sm" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="left" side="left" bordered> </q-drawer>
+    <q-drawer v-model="left" side="left" show-if-above bordered>
+      <SearchInput :filled="true" class="gt-sm" />
+
+      <q-list bordered>
+        <q-item-label header class=" row items-center text-body1">
+          <q-icon name="fal fa-cog" class="q-mr-sm" />
+          <span>Search Settings</span>
+        </q-item-label>
+
+        <StoreSelector :dense="true" />
+
+        <q-separator spaced />
+
+        <q-item class="column">
+          <span class="text-body2 q-mb-sm"> Prices </span>
+          <q-checkbox
+            v-model="fiveOrLess"
+            label="$5 or less"
+            class="q-mb-sm"
+            dense
+          />
+          <q-checkbox
+            v-model="tenOrLess"
+            label="$10 or less"
+            class="q-mb-xs"
+            dense
+          />
+        </q-item>
+      </q-list>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -26,30 +51,26 @@
 </template>
 
 <script>
-import { store, mutations } from "../store/store";
+import { Platform } from "quasar";
+import SearchInput from "../components/SearchInput";
+import StoreSelector from "../components/StoreSelector";
 
 export default {
-  computed: {
-    query() {
-      return store.query;
-    }
+  components: {
+    SearchInput,
+    StoreSelector
+  },
+
+  beforeMount() {
+    console.log(Platform.is);
   },
 
   data() {
     return {
       left: false,
-      search: ""
+      fiveOrLess: false,
+      tenOrLess: false
     };
-  },
-
-  methods: {
-    setQuery: mutations.setQuery
-  },
-
-  watch: {
-    search() {
-      this.setQuery(this.search);
-    }
   }
 };
 </script>
