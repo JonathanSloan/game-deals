@@ -17,14 +17,14 @@
       <SearchInput :filled="true" class="gt-sm" />
 
       <q-list bordered>
-        <q-item-label header class=" row items-center text-body1">
+        <q-item-label header class="row items-center text-body1 q-pb-sm">
           <q-icon name="fal fa-cog" class="q-mr-sm" />
           <span>Search Settings</span>
         </q-item-label>
 
         <StoreSelector :dense="true" />
 
-        <q-separator spaced />
+        <q-separator />
 
         <q-item class="column">
           <span class="text-body2 q-mb-sm"> Prices </span>
