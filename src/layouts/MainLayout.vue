@@ -26,6 +26,7 @@
 
         <q-separator />
 
+        <!-- TODO: make this a component -->
         <q-item class="column">
           <span class="text-body2 q-mb-sm"> Prices </span>
           <q-checkbox
@@ -34,12 +35,35 @@
             class="q-mb-sm"
             dense
           />
+
           <q-checkbox
             v-model="tenOrLess"
             label="$10 or less"
             class="q-mb-xs"
             dense
           />
+
+          <div class="flex row items-center space-between">
+            <q-checkbox v-model="tenOrLess" class="q-mb-xs q-mr-sm" dense />
+
+            <q-input
+              placeholder="Min"
+              outlined
+              dense
+              style="width:75px;"
+              class="min-max-input"
+            />
+
+            <span>&nbsp;&mdash;&nbsp;</span>
+
+            <q-input
+              placeholder="Max"
+              outlined
+              dense
+              style="width:75px;"
+              class="min-max-input"
+            />
+          </div>
         </q-item>
       </q-list>
     </q-drawer>
@@ -74,3 +98,18 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.min-mac-input
+  > .q-field__inner
+  > .q-field__control
+  > .q-field__control-container
+  > input.q-field__natives {
+  .q-field__native,
+  .q-field__prefix,
+  .q-field__suffix,
+  .q-field__input {
+    padding: 0 !important;
+  }
+}
+</style>
