@@ -2,7 +2,7 @@
   <q-layout view="lHh lpR lFf">
     <q-header bordered class="bg-dark text-white">
       <q-toolbar class="q-pa-xs ">
-        <q-btn dense flat round icon="fad fa-sliders-h" @click="left = !left" />
+        <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
 
         <q-toolbar-title>
           <q-avatar icon="fad fa-gamepad-alt" class="q-ml-none" size="xl" />
@@ -27,8 +27,9 @@
         <q-separator />
 
         <!-- TODO: make this a component -->
-        <q-item class="column">
+        <q-item class="column q-mb-sm">
           <span class="text-body2 q-mb-sm"> Prices </span>
+
           <q-checkbox
             v-model="fiveOrLess"
             label="$5 or less"
@@ -39,12 +40,23 @@
           <q-checkbox
             v-model="tenOrLess"
             label="$10 or less"
-            class="q-mb-xs"
+            class="q-mb-sm"
             dense
           />
 
+          <!-- <q-checkbox
+            v-model="twentyOrLess"
+            label="$20 or less"
+            class="q-mb-sm"
+            dense
+          /> -->
+
           <div class="flex row items-center space-between">
-            <q-checkbox v-model="tenOrLess" class="q-mb-xs q-mr-sm" dense />
+            <q-checkbox
+              v-model="customPriceRange"
+              class="q-mb-xs q-mr-sm"
+              dense
+            />
 
             <q-input
               placeholder="Min"
@@ -64,6 +76,14 @@
               class="min-max-input"
             />
           </div>
+        </q-item>
+
+        <q-separator />
+
+        <q-item>
+          <q-item-section>
+            <q-btn class="bg-primary q-ma-sm"> Apply Settings</q-btn>
+          </q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
@@ -91,25 +111,12 @@ export default {
 
   data() {
     return {
+      customPriceRange: false,
       left: false,
       fiveOrLess: false,
       tenOrLess: false
+      // twentyOrLess: false
     };
   }
 };
 </script>
-
-<style lang="scss">
-.min-mac-input
-  > .q-field__inner
-  > .q-field__control
-  > .q-field__control-container
-  > input.q-field__natives {
-  .q-field__native,
-  .q-field__prefix,
-  .q-field__suffix,
-  .q-field__input {
-    padding: 0 !important;
-  }
-}
-</style>
