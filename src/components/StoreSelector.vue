@@ -14,7 +14,7 @@
 
     <q-separator />
 
-    <q-scroll-area style="height: 200px; max-width: 300px;" class="q-px-md">
+    <q-scroll-area style="height: 200px; max-width: 249px;" class="q-ml-md">
       <q-checkbox
         v-model="selectedStores"
         v-for="store in allStores"
@@ -22,7 +22,7 @@
         :val="store.storeID"
         :label="store.storeName"
         class="q-mb-sm"
-        style="width:299px;"
+        style="width:230px;"
         dense
       />
     </q-scroll-area>
@@ -44,7 +44,10 @@ export default {
   mounted() {
     GameService.getStores()
       .then(res => (this.allStores = res.data))
-      .then(this.selectAllStores());
+      .catch(error => console.log("error", error));
+
+    // .then(this.selectAllStores())
+    // .then(console.log(this.selectedStores.toString()));
   },
 
   data: () => ({

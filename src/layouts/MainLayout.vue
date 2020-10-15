@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh lpR lFf">
     <q-header bordered class="bg-dark text-white">
-      <q-toolbar class="q-pa-xs ">
+      <q-toolbar class="q-px-sm q-py-xs">
         <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
 
         <q-toolbar-title>
@@ -13,10 +13,10 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="left" side="left" show-if-above bordered>
+    <q-drawer v-model="left" side="left" show-if-above :width="250" bordered>
       <SearchInput :filled="true" class="gt-sm" />
 
-      <q-list bordered>
+      <q-list>
         <q-item-label header class="row items-center text-body1 q-pb-sm">
           <q-icon name="fal fa-cog" class="q-mr-sm" />
           <span>Search Settings</span>
@@ -43,13 +43,6 @@
             class="q-mb-sm"
             dense
           />
-
-          <!-- <q-checkbox
-            v-model="twentyOrLess"
-            label="$20 or less"
-            class="q-mb-sm"
-            dense
-          /> -->
 
           <div class="flex row items-center space-between">
             <q-checkbox
@@ -115,7 +108,6 @@ export default {
       left: false,
       fiveOrLess: false,
       tenOrLess: false
-      // twentyOrLess: false
     };
   }
 };
