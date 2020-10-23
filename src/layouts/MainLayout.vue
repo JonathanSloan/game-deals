@@ -75,7 +75,7 @@
 
         <q-item>
           <q-item-section>
-            <q-btn class="bg-primary q-ma-sm"> Apply Settings</q-btn>
+            <q-btn class="bg-primary q-ma-sm"> Apply Filter</q-btn>
           </q-item-section>
         </q-item>
       </q-list>
