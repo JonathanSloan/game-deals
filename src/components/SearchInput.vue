@@ -32,12 +32,19 @@ export default {
     filled: Boolean
   },
 
+  computed: {
+    spinner() {
+      return store.spinner;
+    }
+  },
+
   data: () => ({
     emptyResults: [],
     search: ""
   }),
 
   methods: {
+    toggleSpinnger: actions.toggleSpinner,
     updateQuery: actions.updateQuery,
     updateResults: actions.updateResults
   },
@@ -47,13 +54,18 @@ export default {
       // update query in store
       actions.updateQuery(this.search);
 
+      actions.toggleSpinner(true);
+
       // If query is longer than 2 characters, search
       if (this.search.length > 2) {
         actions.updateResults(await GameService.findDeals(this.search));
+        actions.toggleSpinner(false);
       }
+
+      // If query is less than 2 chars, empty results array
       if (this.search.length < 2) {
-        console.log(`less than 2`);
         actions.updateResults(this.emptyResults);
+        actions.toggleSpinner(false);
       }
     }
   }
