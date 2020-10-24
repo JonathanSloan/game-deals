@@ -20,7 +20,7 @@
     </q-list>
 
     <!-- Search Results -->
-    <q-list separator v-else-if="results.length !== 0">
+    <q-list separator v-else-if="results.length !== 0" style="width:100%;">
       <Game
         v-for="result in results"
         :key="result.dealID"
