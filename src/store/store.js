@@ -1,11 +1,22 @@
 import Vue from "vue";
 
 export const store = Vue.observable({
-  query: ""
+  searchQuery: ``,
+  searchResults: [],
+  storeList: []
 });
 
-export const mutations = {
-  setQuery(query) {
-    store.query = query;
+export const actions = {
+  updateQuery(searchQuery) {
+    store.searchQuery = searchQuery;
+  },
+
+  updateResults(searchResults) {
+    console.log(searchResults);
+    store.searchResults = searchResults;
+  },
+
+  setStores(stores) {
+    store.stores = stores;
   }
 };

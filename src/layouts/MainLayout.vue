@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh lpR lFf">
+  <q-layout view="lHh lpR fFf">
     <q-header bordered class="bg-dark text-white">
       <q-toolbar class="q-px-sm q-py-xs">
         <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
@@ -31,18 +31,20 @@
           <span class="text-body2 q-mb-sm"> Prices </span>
 
           <q-checkbox
+            v-model="tenOrLess"
+            label="$10 or less"
+            class="q-mb-sm"
+            dense
+          />
+
+          <q-checkbox
             v-model="fiveOrLess"
             label="$5 or less"
             class="q-mb-sm"
             dense
           />
 
-          <q-checkbox
-            v-model="tenOrLess"
-            label="$10 or less"
-            class="q-mb-sm"
-            dense
-          />
+          <q-checkbox v-model="free" label="Free" class="q-mb-sm" dense />
 
           <div class="flex row items-center space-between">
             <q-checkbox
@@ -107,6 +109,7 @@ export default {
       customPriceRange: false,
       left: false,
       fiveOrLess: false,
+      free: false,
       tenOrLess: false
     };
   }

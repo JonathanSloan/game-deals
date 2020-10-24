@@ -10,10 +10,19 @@ const apiClient = axios.create({
 });
 
 export default {
-  getDeals(gameTitle) {
-    return apiClient.get(`deals?title=${gameTitle}`);
+  // Search for game
+  async findDeals(gameTitle) {
+    const results = await apiClient.get(`deals?title=${gameTitle}`);
+    return results.data;
   },
 
+  // Get top 10 deals of the day
+  async getDeals() {
+    const deals = await apiClient.get(`deals?pageSize=10`);
+    return deals.data;
+  },
+
+  // Get store data
   getStores() {
     return apiClient.get("stores");
   }

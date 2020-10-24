@@ -1,17 +1,25 @@
 // app global css in SCSS form
+body {
+  overflow: hidden;
 
-.body--light {
-  .q-page {
-    background-color: #e7e7e7;
+  &.body--light {
+    .q-page {
+      background-color: #e7e7e7;
+    }
   }
-}
 
-.body--dark {
-  .q-page {
-    background-color: #3d3d3d;
+  &.body--dark {
+    .q-page {
+      background-color: #3d3d3d;
+    }
   }
 }
 
 a {
   text-decoration: none;
+}
+
+main {
+  height: calc(100vh - 56px);
+  overflow-y: auto;
 }

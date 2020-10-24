@@ -1,102 +1,139 @@
 <template>
   <q-page class="column">
-    <q-card class="col-4">
-      <div v-for="t in test" :key="t.storeID">{{ t.storeName }}</div>
+    <div v-for="t in test" :key="t.storeID">{{ t.storeName }}</div>
 
-      <q-list separator>
-        <q-item v-for="deal in deals" :key="deal.dealID">
-          <q-item-section top avatar>
-            <q-img :src="`${deal.thumb}`" style="width:75px;" />
-          </q-item-section>
+    <q-list separator>
+      <q-item v-for="deal in deals" :key="deal.dealID">
+        <q-item-section middle avatar>
+          <q-img :src="`${deal.thumb}`" style="width:90px;" />
+        </q-item-section>
 
-          <q-item-section top>
-            <q-item-label>{{ deal.title }}</q-item-label>
+        <q-item-section top>
+          <q-item-label class="q-mb-xs">
+            {{ deal.title }}
+          </q-item-label>
 
-            <q-item-label caption>
-              Secondary line text. Lorem ipsum dolor sit amet, consectetur
-              adipiscit elit.
-            </q-item-label>
-          </q-item-section>
+          <!-- If on sale -->
+          <q-item-label v-if="deal.isOnSale === `1`">
+            <span class="q-mr-sm strike-out"> ${{ deal.normalPrice }} </span>
+            <span class="q-mr-sm">${{ deal.salePrice }}</span>
 
-          <q-item-section side top>
-            <q-item-label caption>meta</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-card>
+            <!-- Savings percentage -->
+            <q-badge v-if="deal.isOnSale === `1`" align="top">
+              {{ `${Number(deal.savings).toFixed(0)}% off` }}
+            </q-badge>
+          </q-item-label>
+
+          <!-- If not on sale -->
+          <q-item-label v-else> ${{ deal.normalPrice }} </q-item-label>
+
+          <!-- Ratings -->
+          <q-item-label class="flex items-center q-pt-xs" caption>
+            <!-- Metacritic Rating -->
+            <img src="../../public/metacritic.png" class="rating-icon" />
+            <span class="q-mr-md">
+              {{
+                deal.metacriticScore === `0`
+                  ? `Metacritic: &mdash;`
+                  : `Metacritic: ${deal.metacriticScore}%`
+              }}
+            </span>
+
+            <!-- Steam Rating -->
+            <img src="../../public/steam.svg" class="rating-icon" />
+            <span class="q-mr-xs">
+              {{
+                deal.steamRatingPercent === `0`
+                  ? `Steam: &mdash;`
+                  : `Steam: ${deal.steamRatingPercent}%`
+              }}
+            </span>
+          </q-item-label>
+
+          <!-- Redirect to deal -->
+          <q-item-label class="q-pt-sm">
+            <q-btn
+              type="a"
+              :href="`${redirectURL}${deal.dealID}`"
+              target="_blank"
+              label="View Deal"
+              color="primary"
+              size="sm"
+            />
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-list>
   </q-page>
 </template>
 
 <script>
 import axios from "axios";
 import GameService from "../services/GameService";
-import { store } from "../store/store";
+import { store, actions } from "../store/store";
 
 export default {
   name: "PageIndex",
 
-  // created() {
-  //   this.test = GameService.getStores()
-  //     .then(response => (this.test = response.data))
-  //     .catch(error => console.log(`There was an error: ${error.response}`));
-  //   GameService.getDeals(`Skyrim`).then(response => response.data);
-  // },
+  async created() {
+    // Get store data
+    this.setStores(await GameService.getStores());
 
-  async mounted() {
-    this.getDailyDeals();
+    // Get top 10 deals
+    this.deals = await GameService.getDeals();
   },
 
   computed: {
-    query() {
-      return store.query;
+    searchQuery() {
+      return store.searchQuery;
+    },
+
+    searchResults() {
+      return store.searchResults;
     }
   },
 
   data: () => ({
     apiHost: `https://www.cheapshark.com/api/1.0/`,
     deals: [],
+    redirectURL: `https://www.cheapshark.com/redirect?dealID=`,
     results: [],
+    stores: [],
     test: []
   }),
 
   methods: {
-    // TODO: Make these into a service or mixin!
-    getDailyDeals() {
-      fetch(`${this.apiHost}/deals`)
-        .then(response => response.json())
-        .then(result => (this.deals = result))
-        // .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    },
-    searchDeals(gameTitle) {
-      fetch(`${this.apiHost}/deals?title=${gameTitle}`)
-        .then(response => response.json())
-        .then(result => (this.results = result))
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    }
+    setStores: actions.setStores
   },
 
   watch: {
-    query() {
-      GameService.getDeals(this.query).then(response =>
-        console.log(response.data)
-      );
+    searchResults() {
+      this.deals = this.searchResults;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.game-card {
-  border-radius: 0.25rem;
-  margin: 0.5rem;
-  padding: 0rem;
-  width: 350px;
+.strike-out {
+  opacity: 0.4;
+  text-decoration: line-through;
 }
 
-.q-img__image {
-  background-size: contain;
-  background-position: 50% 10% !important;
+.rating-icon {
+  height: 1rem;
+  margin-right: 0.3rem;
+  width: auto;
 }
+// .game-card {
+//   border-radius: 0.25rem;
+//   margin: 0.5rem;
+//   padding: 0rem;
+//   width: 350px;
+// }
+
+// .q-img__image {
+//   background-size: contain;
+//   background-position: 50% 10% !important;
+// }
 </style>

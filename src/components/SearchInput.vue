@@ -22,7 +22,7 @@
 
 <script>
 import GameService from "../services/GameService";
-import { store, mutations } from "../store/store";
+import { store, actions } from "../store/store";
 
 export default {
   name: "SearchInput",
@@ -32,36 +32,30 @@ export default {
     filled: Boolean
   },
 
-  computed: {
-    query() {
-      return store.query;
-    }
-  },
-
   data: () => ({
+    emptyResults: [],
     search: ""
   }),
 
   methods: {
-    setQuery: mutations.setQuery
+    updateQuery: actions.updateQuery,
+    updateResults: actions.updateResults
   },
 
   watch: {
-    query() {
-      if (this.query.length > 2) {
-      }
-    },
+    async search() {
+      // update query in store
+      actions.updateQuery(this.search);
 
-    search() {
+      // If query is longer than 2 characters, search
       if (this.search.length > 2) {
-        GameService.getDeals(this.search).then(response =>
-          console.log(response.data)
-        );
+        actions.updateResults(await GameService.findDeals(this.search));
       }
-      //   this.setQuery(this.search);
+      if (this.search.length < 2) {
+        console.log(`less than 2`);
+        actions.updateResults(this.emptyResults);
+      }
     }
   }
 };
 </script>
-
-<style></style>

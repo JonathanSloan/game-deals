@@ -3,11 +3,8 @@
     <template v-slot:header>
       <q-item-section class="q-pa-xs">
         <span>
-          <span class="text-body2"> Stores </span>
-          <!-- &mdash; -->
-          <span class="text-weight-light">
-            {{ storeSelection }}
-          </span>
+          <span class="text-body2">Stores</span>
+          <span class="text-weight-light">{{ storeSelection }}</span>
         </span>
       </q-item-section>
     </template>
@@ -31,6 +28,7 @@
 
 <script>
 import GameService from "../services/GameService";
+import { store } from "../store/store";
 
 export default {
   name: "StoreSelector",
@@ -44,10 +42,8 @@ export default {
   mounted() {
     GameService.getStores()
       .then(res => (this.allStores = res.data))
+      .then(this.selectAllStores())
       .catch(error => console.log("error", error));
-
-    // .then(this.selectAllStores())
-    // .then(console.log(this.selectedStores.toString()));
   },
 
   data: () => ({
@@ -66,7 +62,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-//
-</style>
