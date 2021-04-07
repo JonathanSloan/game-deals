@@ -1,7 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <!-- TODO: clean this up -->
+  <q-page :class="pageLayout">
     <!-- Daily Deals -->
+
     <q-list separator v-if="searchQuery.length < 3" style="width:100%;">
       <Game
         v-for="deal in deals"
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Game from "../components/Game";
 import GameService from "../services/GameService";
 import { store, actions } from "../store/store";
@@ -71,6 +70,15 @@ export default {
   },
 
   computed: {
+    pageLayout() {
+      if (this.searchQuery.length < 3 || this.results.length !== 0) {
+        return "flex items-start";
+      } else {
+        return "flex flex-center";
+      }
+
+      // (searchQuery.length < 3) || results.length !== 0 ? return "bg-white" : return "bg-blue";
+    },
     searching() {
       return store.spinner;
     },
@@ -98,7 +106,7 @@ export default {
 
   watch: {
     deals() {
-      if (deals.length === 0) actions.toggleSpinner(true);
+      if (this.deals.length === 0) actions.toggleSpinner(true);
       else actions.toggleSpinner(false);
     },
 

@@ -28,7 +28,6 @@
 
 <script>
 import GameService from "../services/GameService";
-import { store } from "../store/store";
 
 export default {
   name: "StoreSelector",
@@ -40,10 +39,10 @@ export default {
   },
 
   mounted() {
+    // Get list of available stores
     GameService.getStores()
       .then(res => (this.allStores = res.data))
-      .then(this.selectAllStores())
-      .catch(error => console.log("error", error));
+      .then(this.selectAllStores());
   },
 
   data: () => ({
