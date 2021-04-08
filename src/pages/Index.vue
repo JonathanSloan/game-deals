@@ -1,8 +1,7 @@
 <template>
   <q-page :class="pageLayout">
-    <!-- Daily Deals -->
-
-    <q-list separator v-if="searchQuery.length < 3" style="width:100%;">
+    <!-- Daily Deals - Default View -->
+    <q-list separator v-if="searchQuery.length < 3" class="full-width">
       <Game
         v-for="deal in deals"
         :key="deal.dealID"
@@ -20,7 +19,7 @@
     </q-list>
 
     <!-- Search Results -->
-    <q-list separator v-else-if="results.length !== 0" style="width:100%;">
+    <q-list separator v-else-if="results.length !== 0" class="full-width">
       <Game
         v-for="result in results"
         :key="result.dealID"
@@ -40,11 +39,11 @@
     <section v-else>
       <!-- Searching spinner -->
       <article v-if="searching">
-        <q-spinner v-model="searching" size="3rem"></q-spinner>
+        <q-spinner v-model="searching" size="3rem" />
       </article>
 
       <!-- If no results -->
-      <article v-else>
+      <article v-else class="ellipsis">
         0 Results were found matching "{{ searchQuery }}"
       </article>
     </section>
@@ -76,9 +75,8 @@ export default {
       } else {
         return "flex flex-center";
       }
-
-      // (searchQuery.length < 3) || results.length !== 0 ? return "bg-white" : return "bg-blue";
     },
+
     searching() {
       return store.spinner;
     },

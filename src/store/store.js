@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 export const store = Vue.observable({
-  searchQuery: ``,
+  searchQuery: '',
   searchResults: [],
   spinner: false,
   storeList: []

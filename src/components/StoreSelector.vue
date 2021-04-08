@@ -43,6 +43,7 @@ export default {
     GameService.getStores()
       .then(res => (this.allStores = res.data))
       .then(this.selectAllStores());
+    console.log(this.allStores);
   },
 
   data: () => ({
