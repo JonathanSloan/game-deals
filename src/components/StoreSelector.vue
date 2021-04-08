@@ -1,17 +1,14 @@
 <template>
   <q-expansion-item v-model="storePanel">
     <template v-slot:header>
-      <q-item-section class="q-pa-xs">
-        <span>
-          <span class="text-body2">Stores</span>
-          <span class="text-weight-light">{{ storeSelection }}</span>
-        </span>
+      <q-item-section class="q-pa-xs text-body2">
+        Stores {{ storeSelection }}
       </q-item-section>
     </template>
 
     <q-separator />
 
-    <q-scroll-area style="height: 200px; max-width: 249px;" class="q-ml-md">
+    <q-scroll-area style="height: 250px; max-width: 249px;" class="q-ml-md">
       <q-checkbox
         v-model="selectedStores"
         v-for="store in allStores"
@@ -38,12 +35,15 @@ export default {
     }
   },
 
-  mounted() {
-    // Get list of available stores
-    GameService.getStores()
-      .then(res => (this.allStores = res.data))
-      .then(this.selectAllStores());
-    console.log(this.allStores);
+  mounted: async function() {
+    // Get all available store data
+    const storeList = await GameService.getStores();
+
+    // Set retrieved data
+    this.allStores = storeList.data.map(store => store);
+
+    // Select all stores by default
+    this.selectedStores = this.allStores.map(store => store.storeID);
   },
 
   data: () => ({
@@ -51,14 +51,6 @@ export default {
     selectedStores: [],
     storePanel: true,
     stores: []
-  }),
-
-  methods: {
-    selectAllStores() {
-      for (let n = 1; n < 32; n++) {
-        this.selectedStores.push(String(n));
-      }
-    }
-  }
+  })
 };
 </script>
