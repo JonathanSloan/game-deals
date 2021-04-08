@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { Platform } from "quasar";
 import PriceSelector from "../components/PriceSelector";
 import SearchInput from "../components/SearchInput";
 import StoreSelector from "../components/StoreSelector";
@@ -57,14 +56,8 @@ export default {
     StoreSelector
   },
 
-  beforeMount() {
-    console.log(Platform.is);
-  },
-
-  data() {
-    return {
-      left: false
-    };
-  }
+  data: () => ({
+    left: false
+  })
 };
 </script>
