@@ -4,8 +4,10 @@
   "description": "A simple app for finding video game deals across multiple online stores",
   "productName": "Game Deals",
   "author": "Jonathan Sloan - jonathanssloan@protonmail.com",
+  "homepage": "https://jonathansloan.github.io/game-deals",
   "private": false,
   "scripts": {
+    "deploy": "quasar build && cp CNAME dist/spa/CNAME && gh-pages -d dist/spa",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
