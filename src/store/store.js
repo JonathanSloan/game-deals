@@ -3,11 +3,20 @@ import Vue from "vue";
 export const store = Vue.observable({
   searchQuery: "",
   searchResults: [],
+  selectedStores: [],
   spinner: false,
   stores: []
 });
 
 export const actions = {
+  setStores(stores) {
+    store.stores = stores;
+  },
+
+  toggleSpinner(spinner) {
+    store.spinner = spinner;
+  },
+
   updateQuery(searchQuery) {
     store.searchQuery = searchQuery;
   },
@@ -18,13 +27,5 @@ export const actions = {
       ...result,
       store: store.stores.data.find(store => store.storeID === result.storeID)
     }));
-  },
-
-  setStores(stores) {
-    store.stores = stores;
-  },
-
-  toggleSpinner(spinner) {
-    store.spinner = spinner;
   }
 };

@@ -25,7 +25,6 @@ export default {
       ...result,
       store: stores.data.find(store => store.storeID === result.storeID)
     }));
-    // console.log(dealData);
     return dealData;
   },
 

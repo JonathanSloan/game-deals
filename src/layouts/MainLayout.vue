@@ -34,16 +34,16 @@
         <PriceSelector />
 
         <q-separator />
-
-        <q-item class="q-pb-none">
-          <q-item-section class="text-center no-margin">
-            <q-btn class="bg-primary q-ma-sm" disable> Apply Filter </q-btn>
-            <span class="text-weight-light text-italic">
-              ( Filtering is currently disabled )
-            </span>
-          </q-item-section>
-        </q-item>
       </q-list>
+
+      <q-item class="absolute-bottom">
+        <q-item-section class="text-center no-margin">
+          <q-btn class="bg-primary q-ma-sm" disable> Apply Filter </q-btn>
+          <span class="text-weight-light text-italic">
+            ( Filtering is currently disabled )
+          </span>
+        </q-item-section>
+      </q-item>
     </q-drawer>
 
     <q-page-container>

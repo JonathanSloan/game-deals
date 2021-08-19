@@ -97,7 +97,6 @@ export default {
   },
 
   data: () => ({
-    apiHost: `https://www.cheapshark.com/api/1.0/`,
     deals: [],
     redirectURL: `https://www.cheapshark.com/redirect?dealID=`,
     results: [],
@@ -110,7 +109,7 @@ export default {
 
   watch: {
     deals() {
-      if (this.deals.length === 0) actions.toggleSpinner(true);
+      if (!this.deals.length) actions.toggleSpinner(true);
       else actions.toggleSpinner(false);
     },
 
