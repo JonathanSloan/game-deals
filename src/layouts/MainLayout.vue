@@ -36,8 +36,8 @@
         <q-separator />
       </q-list>
 
-      <q-item class="absolute-bottom">
-        <q-item-section class="text-center no-margin">
+      <q-item>
+        <q-item-section class="text-center no-margin q-pb-none">
           <q-btn class="bg-primary q-ma-sm" disable> Apply Filter </q-btn>
           <span class="text-weight-light text-italic">
             ( Filtering is currently disabled )

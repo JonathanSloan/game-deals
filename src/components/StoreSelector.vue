@@ -1,7 +1,7 @@
 <template>
   <q-expansion-item v-model="storePanel">
     <template v-slot:header>
-      <q-item-section class="q-pa-xs text-body2">
+      <q-item-section class="no-padding text-body2">
         Stores {{ storeSelection }}
       </q-item-section>
     </template>
