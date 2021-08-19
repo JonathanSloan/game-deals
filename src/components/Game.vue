@@ -5,19 +5,19 @@
     </q-item-section>
 
     <q-item-section top>
-      <q-item-label class="q-mb-xs">
+      <q-item-label class="text-body1 q-mb-xs">
         {{ title }}
       </q-item-label>
 
       <!-- If on sale -->
-      <q-item-label v-if="isDeal">
-        <span class="q-mr-sm strike-out"> {{ normalPrice }} </span>
-        <span class="q-mr-sm">${{ salePrice }}</span>
-
+      <q-item-label v-if="isDeal" class="text-body2 q-py-xs">
         <!-- Savings percentage -->
-        <q-badge align="top">
+        <q-badge align="top" color="green-7" class="q-mr-sm">
           {{ savings }}
         </q-badge>
+
+        <span class="q-mr-sm strike-out"> {{ normalPrice }} </span>
+        <span class="q-mr-sm">${{ salePrice }}</span>
       </q-item-label>
 
       <!-- If not on sale -->
@@ -45,16 +45,23 @@
           }}
         </span>
       </q-item-label>
-
       <!-- Redirect to deal -->
-      <q-item-label class="q-pt-sm">
+      <q-item-label class="q-pt-sm row items-center">
         <q-btn
           type="a"
           :href="`${link}`"
           target="_blank"
+          class="q-mr-md"
           label="View Deal"
           color="primary"
           size="sm"
+        >
+          <q-tooltip>View Game Deal</q-tooltip>
+        </q-btn>
+
+        <img
+          :src="`https://cheapshark.com${storeBanner}`"
+          style="height:24px;"
         />
       </q-item-label>
     </q-item-section>
@@ -72,6 +79,9 @@ export default {
     savings: String,
     metacriticScore: String,
     steamRatingPercent: String,
+    storeName: String,
+    storeIcon: String,
+    storeBanner: String,
     link: String
   }
 };

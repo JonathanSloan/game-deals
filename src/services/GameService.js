@@ -16,10 +16,17 @@ export default {
     return results.data;
   },
 
-  // Get top 10 deals of the day
+  // Get top 10 deals of the day and append store data
   async getDeals() {
+    const stores = await apiClient.get("stores");
     const deals = await apiClient.get(`deals?pageSize=10`);
-    return deals.data;
+
+    const dealData = deals.data.map(result => ({
+      ...result,
+      store: stores.data.find(store => store.storeID === result.storeID)
+    }));
+    // console.log(dealData);
+    return dealData;
   },
 
   // Get store data

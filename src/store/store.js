@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 export const store = Vue.observable({
-  searchQuery: '',
+  searchQuery: "",
   searchResults: [],
   spinner: false,
   storeList: []
@@ -12,8 +12,12 @@ export const actions = {
     store.searchQuery = searchQuery;
   },
 
+  // Updates results, appending store information to deal object
   updateResults(searchResults) {
-    store.searchResults = searchResults;
+    store.searchResults = searchResults.map(result => ({
+      ...result,
+      store: store.stores.data.find(store => store.storeID === result.storeID)
+    }));
   },
 
   setStores(stores) {

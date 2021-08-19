@@ -11,6 +11,9 @@
         :normalPrice="deal.normalPrice"
         :salePrice="deal.salePrice"
         :savings="`${Number(deal.savings).toFixed(0)}% off`"
+        :storeName="deal.store.storeName"
+        :storeIcon="deal.store.images.icon"
+        :storeBanner="deal.store.images.banner"
         :metacriticScore="deal.metacriticScore"
         :steamRatingPercent="deal.steamRatingPercent"
         :dealID="deal.dealID"
@@ -29,6 +32,9 @@
         :normalPrice="result.normalPrice"
         :salePrice="result.salePrice"
         :savings="`${Number(result.savings).toFixed(0)}% off`"
+        :storeName="result.store.storeName"
+        :storeIcon="result.store.images.icon"
+        :storeBanner="result.store.images.banner"
         :metacriticScore="result.metacriticScore"
         :steamRatingPercent="result.steamRatingPercent"
         :dealID="result.dealID"
@@ -66,14 +72,15 @@ export default {
 
     // Get top 10 deals
     this.deals = await GameService.getDeals();
+    console.log(this.deals);
   },
 
   computed: {
     pageLayout() {
       if (this.searchQuery.length < 3 || this.results.length !== 0) {
-        return "flex items-start";
+        return "flex items-start justify-center";
       } else {
-        return "flex flex-center";
+        return "flex flex-center justify-center";
       }
     },
 
@@ -110,6 +117,7 @@ export default {
 
     searchResults() {
       this.results = this.searchResults;
+      console.log(this.results);
     }
   }
 };

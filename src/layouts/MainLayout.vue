@@ -2,18 +2,23 @@
   <q-layout view="lHh lpR fFf">
     <q-header bordered class="bg-dark text-white">
       <q-toolbar class="q-px-sm q-py-xs">
-        <q-btn dense flat round icon="fal fa-sliders-h" @click="left = !left" />
+        <q-btn
+          dense
+          flat
+          round
+          icon="fal fa-sliders-h"
+          @click="drawer = !drawer"
+        />
 
         <q-toolbar-title>
           <q-avatar icon="fad fa-gamepad-alt" class="q-ml-none" size="xl" />
-          <!-- Title Here -->
         </q-toolbar-title>
 
         <SearchInput :dense="true" :filled="true" class="lt-sm" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="left" side="left" show-if-above :width="250" bordered>
+    <q-drawer v-model="drawer" side="left" show-if-above :width="250" bordered>
       <SearchInput :filled="true" class="gt-sm" />
 
       <q-list>
@@ -32,7 +37,10 @@
 
         <q-item>
           <q-item-section>
-            <q-btn class="bg-primary q-ma-sm"> Apply Filter</q-btn>
+            <q-btn class="bg-primary q-ma-sm" disable> Apply Filter </q-btn>
+            <p class="text-center text-weight-light text-italic">
+              ( Filtering is currently disabled )
+            </p>
           </q-item-section>
         </q-item>
       </q-list>
@@ -57,7 +65,7 @@ export default {
   },
 
   data: () => ({
-    left: false
+    drawer: false
   })
 };
 </script>
