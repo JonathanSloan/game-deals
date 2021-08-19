@@ -35,12 +35,12 @@
 
         <q-separator />
 
-        <q-item>
-          <q-item-section>
+        <q-item class="q-pb-none">
+          <q-item-section class="text-center no-margin">
             <q-btn class="bg-primary q-ma-sm" disable> Apply Filter </q-btn>
-            <p class="text-center text-weight-light text-italic">
+            <span class="text-weight-light text-italic">
               ( Filtering is currently disabled )
-            </p>
+            </span>
           </q-item-section>
         </q-item>
       </q-list>

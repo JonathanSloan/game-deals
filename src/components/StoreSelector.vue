@@ -8,7 +8,7 @@
 
     <q-separator />
 
-    <q-scroll-area style="height: calc(100vh - 450px);" class="q-ml-md">
+    <q-scroll-area style="height: calc(100vh - 425px;" class="q-ml-md">
       <q-checkbox
         v-model="selectedStores"
         v-for="store in allStores"

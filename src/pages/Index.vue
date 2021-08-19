@@ -72,7 +72,6 @@ export default {
 
     // Get top 10 deals
     this.deals = await GameService.getDeals();
-    console.log(this.deals);
   },
 
   computed: {
@@ -117,7 +116,6 @@ export default {
 
     searchResults() {
       this.results = this.searchResults;
-      console.log(this.results);
     }
   }
 };

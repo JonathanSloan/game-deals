@@ -11,23 +11,11 @@
     <div class="flex row items-center space-between">
       <q-checkbox v-model="customPriceRange" class="q-mb-xs q-mr-sm" dense />
 
-      <q-input
-        placeholder="Min"
-        outlined
-        dense
-        style="width:75px;"
-        class="min-max-input"
-      />
+      <q-input placeholder="Min" outlined dense style="width:75px;" />
 
       <span>&nbsp;&mdash;&nbsp;</span>
 
-      <q-input
-        placeholder="Max"
-        outlined
-        dense
-        style="width:75px;"
-        class="min-max-input"
-      />
+      <q-input placeholder="Max" outlined dense style="width:75px;" />
     </div>
   </q-item>
 </template>

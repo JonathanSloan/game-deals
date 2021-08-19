@@ -4,7 +4,7 @@ export const store = Vue.observable({
   searchQuery: "",
   searchResults: [],
   spinner: false,
-  storeList: []
+  stores: []
 });
 
 export const actions = {
