@@ -3,7 +3,7 @@
     v-model="search"
     type="search"
     debounce="300"
-    placeholder="Search Games..."
+    placeholder="Search Games"
     borderless
     :dense="dense"
     :filled="filled"
