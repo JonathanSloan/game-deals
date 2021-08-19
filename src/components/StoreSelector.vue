@@ -8,7 +8,10 @@
 
     <q-separator />
 
-    <q-scroll-area style="height: 200px; max-width: 249px;" class="q-ml-md">
+    <q-scroll-area
+      style="height: calc(100vh - 450px); max-width: 249px;"
+      class="q-ml-md"
+    >
       <q-checkbox
         v-model="selectedStores"
         v-for="store in allStores"
@@ -51,6 +54,11 @@ export default {
     selectedStores: [],
     storePanel: true,
     stores: []
-  })
+  }),
+  watch: {
+    selectedStores() {
+      // console.log(this.selectedStores);
+    }
+  }
 };
 </script>
