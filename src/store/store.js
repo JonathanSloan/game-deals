@@ -9,8 +9,14 @@ export const store = Vue.observable({
 });
 
 export const actions = {
+  setSelectedStores(selected) {
+    store.selectedStores = selected.toString();
+  },
+
   setStores(stores) {
-    store.stores = stores;
+    store.stores = stores.data.sort((a, b) =>
+      a.storeName !== b.storeName ? (a.storeName < b.storeName ? -1 : 1) : 0
+    );
   },
 
   toggleSpinner(spinner) {
@@ -25,7 +31,7 @@ export const actions = {
   updateResults(searchResults) {
     store.searchResults = searchResults.map(result => ({
       ...result,
-      store: store.stores.data.find(store => store.storeID === result.storeID)
+      store: store.stores.find(store => store.storeID === result.storeID)
     }));
   }
 };

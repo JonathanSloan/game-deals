@@ -8,11 +8,13 @@ const apiClient = axios.create({
     "Content-Type": "application/json"
   }
 });
+import { actions, store } from "../store/store";
 
 export default {
   // Search for game
   async findDeals(gameTitle) {
-    const results = await apiClient.get(`deals?title=${gameTitle}`);
+    const requestUrl = `deals?title=${gameTitle}&storeID=${store.selectedStores}`;
+    const results = await apiClient.get(requestUrl);
     return results.data;
   },
 

@@ -24,6 +24,7 @@
 
 <script>
 import GameService from "../services/GameService";
+import { store, actions } from "../store/store";
 
 export default {
   name: "StoreSelector",
@@ -36,10 +37,10 @@ export default {
 
   mounted: async function() {
     // Get all available store data
-    const storeList = await GameService.getStores();
+    await GameService.getStores();
 
     // Set retrieved data
-    this.allStores = storeList.data.map(store => store);
+    this.allStores = store.stores.map(store => store);
 
     // Select all stores by default
     this.selectedStores = this.allStores.map(store => store.storeID);
@@ -53,8 +54,10 @@ export default {
   }),
 
   watch: {
-    selectedStores() {
-      // console.log(this.selectedStores);
+    // Update Selected Stores
+    async selectedStores() {
+      actions.setSelectedStores(this.selectedStores);
+      actions.updateResults(await GameService.findDeals(store.searchQuery));
     }
   }
 };

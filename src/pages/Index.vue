@@ -68,7 +68,8 @@ export default {
 
   async created() {
     // Get store data
-    this.setStores(await GameService.getStores());
+    const allStores = await GameService.getStores();
+    actions.setStores(allStores);
 
     // Get top 10 deals
     this.deals = await GameService.getDeals();
@@ -102,10 +103,6 @@ export default {
     results: [],
     stores: []
   }),
-
-  methods: {
-    setStores: actions.setStores
-  },
 
   watch: {
     deals() {
